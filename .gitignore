@@ -1,0 +1,28 @@
+# arquivos de trabalho (verificações, screenshots, mapa antigo)
+.taste-skill/
+shots/
+map.json
+
+# partes do kit que a página não usa
+assets/photos/
+assets/objects/
+assets/scenes/
+assets/effects/
+assets/moments/
+assets/diagrams/
+assets/starter.html
+assets/layout/*
+!assets/layout/layout.css
+!assets/layout/layout.js
+assets/icons/*
+!assets/icons/icon.css
+assets/components/*
+!assets/components/base.css
+!assets/components/fx-map/
+assets/components/fx-map/*
+!assets/components/fx-map/component.css
+
+# imagens que saíram do site
+img/ig/*
+!img/ig/ig3.jpg
+img/dores.jpg
