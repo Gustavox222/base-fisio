@@ -1,0 +1,122 @@
+/* =====================================================================
+   "Tempero": camada de animação da cópia local (GSAP + Motion).
+   Componentes inspirados em 21st.dev, refeitos em HTML/CSS/JS puro:
+   Animated Badge, Spotlight, Border Beam, Shimmer Button, Marquee, Number Ticker.
+   Tudo some sob prefers-reduced-motion e nada fica escondido sem o script.
+   ===================================================================== */
+
+/* barra de progresso da rolagem (Motion scroll) */
+.scroll-progress {
+  position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 200;
+  background: var(--grad-brand); transform-origin: 0 50%; transform: scaleX(0);
+  box-shadow: 0 0 12px rgba(43,179,236,.7); pointer-events: none;
+}
+
+/* ---------- HERO ---------- */
+.hero { position: relative; isolation: isolate; overflow: clip; }
+.fx-hero { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.fx-hero .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; will-change: transform; }
+.fx-hero .orb--a { width: 520px; height: 520px; right: -120px; top: -140px; background: radial-gradient(circle, #2bb3ec 0%, transparent 70%); }
+.fx-hero .orb--b { width: 420px; height: 420px; left: -160px; bottom: -120px; background: radial-gradient(circle, #1f5fe0 0%, transparent 70%); opacity: .45; }
+.fx-hero .fx-grid {
+  position: absolute; inset: -2px;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+          mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+/* Spotlight (21st.dev): luz que segue o cursor */
+.fx-hero .spotlight {
+  position: absolute; inset: 0;
+  background: radial-gradient(420px circle at var(--sx, 70%) var(--sy, 30%), rgba(43,179,236,.16), transparent 60%);
+}
+
+/* Animated Badge (21st.dev) */
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  padding: 6px 14px 6px 10px; border-radius: 999px; font-size: 14px; letter-spacing: .02em;
+  color: var(--ink); background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(43,179,236,.35);
+}
+.pulse-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #2bb3ec; }
+.pulse-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #2bb3ec; animation: tp-pulse 1.8s ease-out infinite; }
+@keyframes tp-pulse { from { transform: scale(1); opacity: .8; } to { transform: scale(3.2); opacity: 0; } }
+
+.hero h1 .grad .tp-word { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero h1 .grad:has(.tp-word) { background: none; color: inherit; }
+
+/* selos flutuando sobre a foto do espaço */
+.hero-visual { position: relative; }
+.float-badge {
+  position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 14px; font: 600 14px/1.2 var(--font-display); color: #fff;
+  background: rgba(8,17,36,.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px -12px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.12);
+}
+.float-badge b { color: #f5b301; font-weight: 700; }
+.float-badge .tp-dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 10px #34d399; }
+.fb-1 { left: 20px; bottom: 24px; }
+.fb-2 { right: 20px; top: 24px; }
+
+/* ---------- MARQUEE (21st.dev) ---------- */
+.marquee {
+  position: relative; overflow: hidden; padding: 22px 0;
+  border-block: 1px solid rgba(255,255,255,.07);
+  background: linear-gradient(90deg, rgba(43,179,236,.08), rgba(31,95,224,.05), rgba(43,179,236,.08));
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track { display: flex; width: max-content; will-change: transform; }
+.marquee__group { display: flex; align-items: center; gap: 40px; padding-right: 40px; flex: none; }
+.marquee__item { font: 700 clamp(28px, 4vw, 56px)/1 var(--font-display); letter-spacing: .02em; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(238,244,251,.45); }
+.marquee__item:nth-child(4n+1) { color: #eef4fb; -webkit-text-stroke: 0; }
+.marquee__star { color: #2bb3ec; font-size: 22px; }
+
+/* ---------- SPOTLIGHT CARDS (21st.dev) ---------- */
+.step, .review { position: relative; overflow: hidden; }
+.step::before, .review::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(43,179,236,.16), transparent 60%);
+}
+.step:hover::before, .review:hover::before { opacity: 1; }
+.step > *, .review > * { position: relative; z-index: 1; }
+
+/* trilho das 3 etapas, preenchido pela rolagem */
+.steps-rail { position: relative; height: 2px; margin: 0 0 32px; background: rgba(255,255,255,.08); border-radius: 2px; }
+.steps-rail span { position: absolute; inset: 0; background: var(--grad-brand); transform-origin: 0 50%; transform: scaleX(0); border-radius: 2px; box-shadow: 0 0 14px rgba(43,179,236,.6); }
+.steps-rail i { position: absolute; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #0a1428; box-shadow: inset 0 0 0 2px rgba(255,255,255,.2); transition: background .3s, box-shadow .3s; }
+.steps-rail i.is-on { background: #2bb3ec; box-shadow: 0 0 0 4px rgba(43,179,236,.2), 0 0 14px #2bb3ec; }
+
+/* ---------- BORDER BEAM (21st.dev) no cartão da nota ---------- */
+@property --beam { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.rating { position: relative; isolation: isolate; }
+.rating::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; z-index: 2; pointer-events: none;
+  background: conic-gradient(from var(--beam), transparent 0deg 300deg, #5ad3fa 330deg, #fff 350deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: tp-beam 4s linear infinite;
+}
+@keyframes tp-beam { to { --beam: 360deg; } }
+
+/* ---------- SHIMMER BUTTON (21st.dev) ---------- */
+.btn--primary { position: relative; overflow: hidden; isolation: isolate; }
+.btn--primary::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.55) 50%, transparent 65%);
+  transform: translateX(-120%); animation: tp-shimmer 3.2s ease-in-out infinite;
+}
+@keyframes tp-shimmer { 0%, 55% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+/* nada de movimento para quem pediu menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot::after, .rating::after, .btn--primary::after { animation: none; }
+  .rating::after { display: none; }
+}
+/* antes do script: some o que vai entrar animado; se o script falhar, volta em 3s */
+html.tp-anim:not(.tp-ready) [data-tp="intro"] { visibility: hidden; }
+
+/* correções: o kit põe os filhos da moldura em position: relative e centraliza; o selo do topo não estica */
+.frame > .float-badge { position: absolute; }
+.hero-copy > .hero-eyebrow { align-self: flex-start; width: fit-content; }

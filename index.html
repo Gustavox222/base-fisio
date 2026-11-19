@@ -44,7 +44,8 @@
   color-scheme: dark;
 }
 </style>
-<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<link rel="stylesheet" href="assets/tempero/tempero.css">
+<script>if (matchMedia('(prefers-reduced-motion: no-preference)').matches) { document.documentElement.classList.add('tp-anim'); setTimeout(function () { document.documentElement.classList.add('tp-ready'); }, 3000); }</script>
 <script src="assets/backgrounds/backgrounds.js"></script>
 <style>
   .nav__logo img { width: 36px; height: 36px; border-radius: 50%; display: block; }
@@ -161,6 +162,7 @@
      palette: brand das cores da logo (azul-marinho #0c1a33, branco, ciano #1f9fd6); type schibsted
      moments: pinned-chapters em #como -->
 
+<div class="scroll-progress" aria-hidden="true"></div>
 <header class="nav">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Pular para o conteúdo</a>
@@ -204,10 +206,12 @@
 </header>
 
 <main id="top">
-  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+  <section class="hero hero--split" aria-labelledby="hero-h">
+    <div class="fx-hero" aria-hidden="true"><span class="orb orb--a"></span><span class="orb orb--b"></span><div class="fx-grid"></div><div class="spotlight"></div></div>
     <div class="wrap">
       <div class="hero-text grid hero-split">
-        <div class="hero-copy span-6">
+        <div class="hero-copy span-6" data-tp="intro">
+          <p class="hero-eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Fisioterapia · Saúde · Performance</p>
           <h1 id="hero-h">Fisioterapia esportiva em <span class="grad">São José dos Campos</span></h1>
           <p class="t-lead">Ortopedia, performance e recovery no Jardim Satélite, para quem treina: corrida, futevôlei, musculação e qualquer treino que a dor anda atrapalhando.</p>
           <div class="btn-row">
@@ -220,12 +224,16 @@
             <div><dt>Google</dt><dd>Nota 5,0 em 38 avaliações</dd></div>
           </dl>
         </div>
-        <div class="hero-visual frame frame--photo span-6 start-7">
+        <div class="hero-visual frame frame--photo span-6 start-7" data-tp="intro">
+          <span class="float-badge fb-1"><b>★ 5,0</b> no Google · 38 avaliações</span>
+          <span class="float-badge fb-2"><span class="tp-dot" aria-hidden="true"></span>Seg a sex · 7h às 20h</span>
           <img class="frame__img" src="img/espaco.jpg" alt="O espaço da BASE: maca, gaiola de agachamento, halteres, bolas suíças e piso de grama sintética" fetchpriority="high" style="object-position: 55% 50%" data-source="client" data-subject="o espaço da clínica">
         </div>
       </div>
     </div>
   </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee__track"><div class="marquee__group"><span class="marquee__item">ORTOPEDIA</span><span class="marquee__star">✦</span><span class="marquee__item">PERFORMANCE</span><span class="marquee__star">✦</span><span class="marquee__item">RECOVERY</span><span class="marquee__star">✦</span><span class="marquee__item">PÓS-OPERATÓRIO</span><span class="marquee__star">✦</span><span class="marquee__item">PREVENÇÃO</span><span class="marquee__star">✦</span><span class="marquee__item">REABILITAÇÃO</span><span class="marquee__star">✦</span><span class="marquee__item">TREINO FUNCIONAL</span><span class="marquee__star">✦</span></div><div class="marquee__group"><span class="marquee__item">ORTOPEDIA</span><span class="marquee__star">✦</span><span class="marquee__item">PERFORMANCE</span><span class="marquee__star">✦</span><span class="marquee__item">RECOVERY</span><span class="marquee__star">✦</span><span class="marquee__item">PÓS-OPERATÓRIO</span><span class="marquee__star">✦</span><span class="marquee__item">PREVENÇÃO</span><span class="marquee__star">✦</span><span class="marquee__item">REABILITAÇÃO</span><span class="marquee__star">✦</span><span class="marquee__item">TREINO FUNCIONAL</span><span class="marquee__star">✦</span></div></div></div>
 
   <section class="section" id="sobre" aria-labelledby="sobre-h">
     <div class="wrap">
@@ -281,6 +289,7 @@
         <h2 id="como-h">As 3 etapas da fisioterapia na BASE</h2>
         <p>Cada etapa tem um objetivo medido. Você sabe onde está e o que falta para voltar ao treino.</p>
       </div>
+      <div class="steps-rail" aria-hidden="true"><span></span><i style="left:0%"></i><i style="left:50%"></i><i style="left:100%"></i></div>
       <ol class="steps">
         <li class="step">
           <div class="step__img"><img src="img/stock/photo-f114900544-960.jpg" srcset="img/stock/photo-f114900544-500.jpg 500w, img/stock/photo-f114900544-960.jpg 960w" sizes="(max-width: 1023px) 100vw, 33vw" alt="Raio-X de frente da articulação do joelho" loading="lazy" style="object-position: 50% 48%" data-source="stand-in" data-subject="raio-X do joelho"></div>
@@ -417,9 +426,20 @@
   <a class="btn btn--primary" href="https://wa.me/5512992454994?text=Ol%C3%A1!%20Quero%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20BASE." target="_blank" rel="noopener">Agendar avaliação</a>
 </nav>
 
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/SplitText.min.js" defer></script>
 <script type="module" src="assets/system.js"></script>
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>
+<script type="module">
+  /* Motion (motion.dev) via CDN, versão fixa. Fica em window.Motion para outros scripts;
+     o evento "motion:ready" avisa quando carregou. Respeite prefers-reduced-motion ao animar. */
+  import * as Motion from "https://cdn.jsdelivr.net/npm/motion@14.9.1/+esm";
+  window.Motion = Motion;
+  document.dispatchEvent(new Event("motion:ready"));
+</script>
+<script type="module" src="assets/tempero/tempero.js"></script>
 <script>
   /* copiar endereço: script simples, funciona até abrindo o arquivo direto */
   document.querySelectorAll('[data-copy]').forEach(function (b) {
