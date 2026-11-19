@@ -12,13 +12,13 @@
 <meta property="og:url" content="https://gustavox222.github.io/base-fisio/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="img/logo.jpg" type="image/jpeg">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0a1428">
 <link rel="canonical" href="https://gustavox222.github.io/base-fisio/">
 <meta name="site-kind" content="other">
 <meta name="page-type" content="service">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500..700&family=Schibsted+Grotesk:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/system.css">
 <link rel="stylesheet" href="assets/ui/cards.css">
 <link rel="stylesheet" href="assets/motion/motion.css">
@@ -29,16 +29,19 @@
 <link rel="stylesheet" href="assets/components/fx-map/component.css">
 <style>
 :root {
-  --p-bg: #ffffff; --p-surface: #eef4f9; --p-ink: #0c1a33; --p-muted: #5d697b;
-  --p-accent: #1f9fd6; --p-accent-ink: #111111; --p-action: #1f9fd6; --p-action-ink: #111111;
-  --p-inv-bg: #0c1a33; --p-inv-surface: #1a2840; --p-inv-ink: #ffffff; --p-inv-muted: #99a0ad;
-  --p-inv-accent: #1f9fd6; --p-inv-accent-ink: #111111; --p-inv-action: #1f9fd6; --p-inv-action-ink: #111111;
-  --font-display: "Schibsted Grotesk", system-ui, sans-serif;
+  --p-bg: #0a1428; --p-surface: #102040; --p-ink: #eef4fb; --p-muted: #9fb0c8;
+  --p-accent: #2bb3ec; --p-accent-ink: #06101f; --p-action: #2bb3ec; --p-action-ink: #06101f;
+  --p-inv-bg: #060d1c; --p-inv-surface: #0f1c36; --p-inv-ink: #ffffff; --p-inv-muted: #9fb0c8;
+  --p-inv-accent: #2bb3ec; --p-inv-accent-ink: #06101f; --p-inv-action: #2bb3ec; --p-inv-action-ink: #06101f;
+  --font-display: "Oxanium", "Schibsted Grotesk", system-ui, sans-serif;
   --font-text: "Schibsted Grotesk", system-ui, sans-serif;
-  --display-weight: 400;
-  --display-tracking: -0.035em;
-  --display-tracking-xl: -0.042em;
+  --display-weight: 600;
+  --display-tracking: -0.01em;
+  --display-tracking-xl: -0.015em;
   --ly-scale: 0.98;
+  --grad-brand: linear-gradient(135deg, #5ad3fa 0%, #2bb3ec 45%, #1f7fe0 100%);
+  --grad-card: linear-gradient(160deg, rgba(255,255,255,.075) 0%, rgba(255,255,255,.02) 100%);
+  color-scheme: dark;
 }
 </style>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
@@ -56,6 +59,32 @@
   .contact-rows .ic { width: 20px; height: 20px; flex: none; }
   .socials a { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; }
   .socials .ic { width: 20px; height: 20px; }
+  /* ---------- tema escuro com gradientes ---------- */
+  body { background:
+      radial-gradient(900px 520px at 88% -4%, rgba(43,179,236,.20), transparent 62%),
+      radial-gradient(700px 480px at -8% 30%, rgba(31,127,224,.12), transparent 60%),
+      linear-gradient(180deg, #0a1428 0%, #08112a 50%, #060d1c 100%);
+    background-attachment: fixed; }
+  main > section.section:not(.ground-surface):not(.ground-inverse), main > .hero { background: transparent; }
+  header.nav { background: rgba(8, 17, 36, .92); backdrop-filter: saturate(140%) blur(8px); border-bottom-color: rgba(255,255,255,.07); }
+  header.nav .nav__menu { background: #0c1a33; }
+  h1, h2, .step h3, .cx-title, .rating__score, .close__word { font-family: var(--font-display); }
+  h1 .grad, .rating__score { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .btn--primary { background-image: var(--grad-brand); border: 0; box-shadow: 0 8px 24px -10px rgba(43,179,236,.65); }
+  .btn--secondary { background: rgba(255,255,255,.08); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+  .nav__logo img { box-shadow: 0 0 0 1.5px rgba(43,179,236,.55); }
+  .hero-visual, .frame--photo, .step__img { box-shadow: 0 24px 60px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.06); }
+  #como.ground-surface { background: linear-gradient(180deg, #0f1f3e 0%, #0b1832 100%); border-block: 1px solid rgba(255,255,255,.05); }
+  #contato.ground-inverse { background: radial-gradient(800px 400px at 80% 0%, rgba(43,179,236,.12), transparent 60%), linear-gradient(180deg, #071026 0%, #050b18 100%); }
+  .step { background: var(--grad-card); border: 1px solid rgba(255,255,255,.07); border-radius: var(--r-lg); padding: 16px 16px 8px; }
+  .step__num { color: var(--p-accent); }
+  .rating { background: linear-gradient(150deg, #133a78 0%, #0c2350 55%, #081738 100%); box-shadow: inset 0 0 0 1px rgba(43,179,236,.35), 0 20px 50px -25px rgba(43,179,236,.5); }
+  .review { background: var(--grad-card); border: 1px solid rgba(255,255,255,.08); }
+  .review__avatar { background: var(--grad-brand); color: #06101f; }
+  .sobre__facts li > span:last-child { color: var(--ink); }
+  footer.closing { background: linear-gradient(180deg, transparent 0%, rgba(43,179,236,.07) 100%); border-top: 1px solid rgba(255,255,255,.06); }
+  #contato .cx-map__card { background: rgba(8,17,36,.94); }
+  @container (min-width: 900px) { #contato .cx-map__card { left: auto; right: var(--s-5); top: var(--s-5); bottom: auto; } }
   /* seções com a altura do próprio conteúdo: nada de tela meio vazia */
   main > section.section:not(.hero) { height: auto; min-height: 0; padding: 112px 0; }
   main > section.section:not(.hero) > .wrap { flex: 0 0 auto; }
@@ -179,7 +208,7 @@
     <div class="wrap">
       <div class="hero-text grid hero-split">
         <div class="hero-copy span-6">
-          <h1 id="hero-h">Fisioterapia esportiva em São José dos Campos</h1>
+          <h1 id="hero-h">Fisioterapia esportiva em <span class="grad">São José dos Campos</span></h1>
           <p class="t-lead">Ortopedia, performance e recovery no Jardim Satélite, para quem treina: corrida, futevôlei, musculação e qualquer treino que a dor anda atrapalhando.</p>
           <div class="btn-row">
             <a class="btn btn--primary" href="https://wa.me/5512992454994?text=Ol%C3%A1!%20Quero%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20BASE." target="_blank" rel="noopener">Agendar avaliação<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
