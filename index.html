@@ -69,6 +69,8 @@
   main > section.section:not(.ground-surface):not(.ground-inverse), main > .hero { background: transparent; }
   header.nav { background: rgba(8, 17, 36, .92); backdrop-filter: saturate(140%) blur(8px); border-bottom-color: rgba(255,255,255,.07); }
   header.nav .nav__menu { background: #0c1a33; }
+  /* celular e tablet: o menu é uma folha fixa dentro da barra; desfoque ou transform na barra a prenderiam a 72px */
+  @media (max-width: 1023px) { header.nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: #081124; } header.nav.is-open { transform: none !important; translate: none !important; } }
   h1, h2, .step h3, .cx-title, .rating__score, .close__word { font-family: var(--font-display); }
   h1 .grad, .rating__score { background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .btn--primary { background-image: var(--grad-brand); border: 0; box-shadow: 0 8px 24px -10px rgba(43,179,236,.65); }

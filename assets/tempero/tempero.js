@@ -149,7 +149,9 @@ if (!gsap || !ScrollTrigger || !SplitText) {
     const nav = document.querySelector('header.nav');
     if (nav) {
       const show = gsap.quickTo(nav, 'yPercent', { duration: .35, ease: 'power2.out' });
-      ScrollTrigger.create({ start: 120, end: 'max', onUpdate: (self) => show(self.direction > 0 ? -110 : 0), onLeaveBack: () => show(0) });
+      // com o menu aberto a barra volta ao lugar e não some
+      new MutationObserver(() => { if (nav.classList.contains('is-open')) gsap.set(nav, { yPercent: 0 }); }).observe(nav, { attributes: true, attributeFilter: ['class'] });
+      ScrollTrigger.create({ start: 120, end: 'max', onUpdate: (self) => show(self.direction > 0 && !nav.classList.contains('is-open') ? -110 : 0), onLeaveBack: () => show(0) });
     }
 
     // fontes e imagens mudam a altura das seções: recalcula
